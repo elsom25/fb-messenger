@@ -6,7 +6,7 @@
       <div class="text-center">
         <a href="/auth/twitter" class="btn btn-primary"><i class="icon-twitter"></i> <span><%= t('auth.twitter_html') %></span></a>
         <a href="/auth/github" class="btn"><i class="icon-github-alt"></i> <span><%= t('auth.github_html') %></span></a>
-        <a href="/auth/developer" class="btn"><i class="icon-github-alt"></i> <span><%= t('auth.developer_html') %></span></a>
+        <% unless Rails.env.production? %><a href="/auth/developer" class="btn"><i class="icon-github-alt"></i> <span><%= t('auth.developer_html') %></span></a><% end %>
       </div>
     <% end %>
   </div>

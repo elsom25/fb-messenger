@@ -10,7 +10,7 @@ This is a starter web application based on the following technology stack:
 * Twitter Bootstrap
 * OmniAuth with strategies for Twitter & GitHub
 
-Starter App is deployable on Heroku.
+Starter App is deployable on Heroku. Here is a live demo: http://frozen-savannah-6000.herokuapp.com
 
 This is basically a combination of https://github.com/diowa/ruby2-rails4-bootstrap-heroku and https://github.com/codecase/omniauth-rails
 
