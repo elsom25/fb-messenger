@@ -1,0 +1,12 @@
+<div class='navbar navbar-fixed-top'>
+  <div class='navbar-inner'>
+    <div class='container'>
+      <%= link_to Rails.application.class.parent_name, root_path, class: 'brand' %>
+      <% if logged_in? %>
+        <div class="brand">Hi, <%= current_user.name %></div>
+        <%= link_to t('auth.logout'), logout_path, class: 'brand', style: "color: blue" %>
+      <% else %><%= link_to t('auth.login'), login_path, class: 'brand', style: "color: blue" %>
+      <% end %>
+    </div>
+  </div>
+</div>

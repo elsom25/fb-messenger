@@ -21,3 +21,18 @@
 
 en:
   hello: "Hello world"
+  app:
+    title: "Omniauth Rails (codecase)"
+    subtitle: "Example of OmniAuth implementations in Ruby on Rails 4."
+  auth:
+    twitter_html: "Login with <strong>Twitter</strong>"
+    github_html: "Login with <strong>GitHub</strong>"
+    developer_html: "Login as developer"
+    logout: "Logout"
+  notifications:
+    account_created: 'Your account has been created and you have been logged in!'
+    provider_already_connected: 'Your account at %{provider} is already connected!.'
+    provider_added: 'Your %{provider} account has been added for logging in!.'
+    provider_unlinked: 'Your %{provider} account has been unlinked!.'
+    authentication_error: 'There was an error at the remote authentication service!.'
+

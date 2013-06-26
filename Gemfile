@@ -7,6 +7,10 @@ gem 'rails', '4.0.0'
 gem 'puma'
 gem 'unicorn'
 
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-github'
+
 # Multi-environment configuration
 # gem 'simpleconfig'
 
@@ -25,7 +29,7 @@ gem 'pg'
 
 # Miscellanea
 # gem 'google-analytics-rails'
-gem 'haml'
+# gem 'haml'
 # gem 'http_accept_language'
 gem 'jquery-rails'
 gem 'nokogiri'
@@ -33,7 +37,8 @@ gem 'nokogiri'
 
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
-gem 'haml_assets'
+# gem 'haml_assets'
+
 # gem 'handlebars_assets'
 gem 'i18n-js'
 gem 'jquery-turbolinks'
