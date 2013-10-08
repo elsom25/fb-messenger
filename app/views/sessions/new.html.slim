@@ -1,0 +1,16 @@
+.row
+  .span10.offset1
+    - if logged_in?
+      a.btn href=logout_path = t('auth.logout')
+    - else
+      .text-center
+        a.btn.btn-primary href="/auth/twitter"
+          i.icon-twitter
+          span= t('auth.twitter_html')
+        a.btn.btn-primary href="/auth/facebook"
+          i.icon-facebook
+          span= t('auth.facebook_html')
+        - unless Rails.env.production?
+          a.btn href="/auth/developer"
+            i.icon-github-alt
+            span= t('auth.developer_html')

@@ -1,0 +1,14 @@
+development:
+  fb_app_id: '495267657204738'
+  fb_secret_key: 'd22f322e370763ce558da3c6d8c66bdc'
+  fb_callback_url: 'http://localhost:3000/'
+
+test:
+  fb_app_id: '495267657204738'
+  fb_secret_key: 'd22f322e370763ce558da3c6d8c66bdc'
+  fb_callback_url: 'http://localhost:3000/'
+
+production:
+  fb_app_id: '495267657204738'
+  fb_secret_key: 'd22f322e370763ce558da3c6d8c66bdc'
+  fb_callback_url: 'http://platform.jcmcginnis.com/'

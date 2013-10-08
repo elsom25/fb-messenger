@@ -26,7 +26,7 @@ en:
     subtitle: "Example of OmniAuth implementations in Ruby on Rails 4."
   auth:
     twitter_html: "Login with <strong>Twitter</strong>"
-    github_html: "Login with <strong>GitHub</strong>"
+    facebook_html: "Login with <strong>Facebook</strong>"
     developer_html: "Login as developer"
     logout: "Logout"
   notifications:

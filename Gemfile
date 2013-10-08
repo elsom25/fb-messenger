@@ -44,7 +44,6 @@ gem 'zurb-foundation'
 # gem 'google-analytics-rails'
 # gem 'haml'
 # gem 'http_accept_language'
-# gem 'resque', require: 'resque/server' # Resque web interface
 
 group :development, :test do
   gem 'debugger'

@@ -1,5 +1,6 @@
 class ServicesController < ApplicationController
   skip_before_filter :verify_authenticity_token
+
   def index
     @providers     ||= omniauth_providers
     @user_services   = current_user.services
@@ -62,7 +63,8 @@ class ServicesController < ApplicationController
     redirect_to root_url
   end
 
-  private
+private
+
   def omnihash
     request.env['omniauth.auth']
   end
