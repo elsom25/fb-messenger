@@ -24,18 +24,17 @@ html.no-js lang=I18n.locale.to_s xmlns='http://www.w3.org/1999/xhtml' xmlns:fb='
 
     /! [Begin] Navigation
     header
-      .fixed
-        nav.top-bar.base-nav
-          /! Title Area
-          ul.title-area
-            li.name
-              h1= link_to t('app.title'), root_path
-            li.toggle-topbar.menu-icon: a href="#"
-              span Menu
+      nav.top-bar.base-nav
+        /! Title Area
+        ul.title-area
+          li.name
+            h1= link_to t('app.title'), root_path
+          li.toggle-topbar.menu-icon: a href="#"
+            span Menu
 
-          /! Content
-          section.top-bar-section
-            = render 'layouts/nav'
+        /! Content
+        section.top-bar-section
+          = render 'layouts/nav'
     /! [End] Navigation
 
     /! [Begin] Content
@@ -54,5 +53,4 @@ html.no-js lang=I18n.locale.to_s xmlns='http://www.w3.org/1999/xhtml' xmlns:fb='
 
     /! Included JS Files
     = include_gon watch: true
-    = javascript_include_tag '//squaresend.com/squaresend.js', async: true
     = yield :javascript
