@@ -1,0 +1,58 @@
+doctype html
+html.no-js lang=I18n.locale.to_s xmlns='http://www.w3.org/1999/xhtml' xmlns:fb='https://www.facebook.com/2008/fbml'
+
+  head
+    meta charset='utf-8'
+    meta name='viewport' content='width=device-width, initial-scale=1.0'
+    meta name='description' content=(content_for?(:description) ? yield(:description) : t('app.title'))
+
+    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Courgette|Satisfy'
+    = stylesheet_link_tag 'app', media: 'all'
+
+    = javascript_include_tag 'modernizr'
+    = csrf_meta_tags
+
+    title= content_for?(:title) ? yield(:title) << ' | ' << t('app.title') : t('app.title')
+
+    / Placed at the top of the document 'cause of turbolinks
+    = javascript_include_tag 'application'
+
+    = yield :head
+
+  body class="controller-#{controller_path.gsub(/\//, '-')} action-#{action_name}"
+    = render 'layouts/facebook_sdk'
+
+    /! [Begin] Navigation
+    header
+      .fixed
+        nav.top-bar.base-nav
+          /! Title Area
+          ul.title-area
+            li.name
+              h1= link_to t('app.title'), root_path
+            li.toggle-topbar.menu-icon: a href="#"
+              span Menu
+
+          /! Content
+          section.top-bar-section
+            = render 'layouts/nav'
+    /! [End] Navigation
+
+    /! [Begin] Content
+    article#main.main role="main"
+      = yield
+    /! [End] Content
+
+    /! [Begin] Footer
+    footer
+      = render 'layouts/footer'
+    /! [End] Footer
+
+    /! Rails Flash Messages
+    .messages
+      = render 'layouts/messages'
+
+    /! Included JS Files
+    = include_gon watch: true
+    = javascript_include_tag '//squaresend.com/squaresend.js', async: true
+    = yield :javascript

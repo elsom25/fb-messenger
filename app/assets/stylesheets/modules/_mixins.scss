@@ -1,0 +1,62 @@
+@mixin standard-link($normal, $underline, $hover:false) {
+  @include link-colors($normal, $hover); border-bottom:1px dotted $underline;
+
+  &:focus { border:1px dashed; }
+  &:hover { background:fade-out($underline, 0.75); border-bottom:1px solid; }
+  &:active { position:relative; top:1px; }
+}
+
+@mixin parallex-background($height, $bg-image) {
+  height:$height;
+  width:100%;
+  margin:0 auto;
+  overflow:hidden;
+
+  @include background-size(cover);
+  background-attachment:fixed;
+  background-position:50% 0;
+  background-image:$bg-image;
+}
+
+@mixin background-overlay($height, $overlay-image:image-url('dot-pattern.png'), $top:0) {
+  margin-top:$topbar-height + $top; // to handle JS Topbar
+
+  background-image:$overlay-image;
+  width:100%; height:$height;
+  position:absolute; top:0; left:0;
+  z-index:25;
+}
+
+@mixin text-overlay($color:black, $bg:white) {
+  color:$color;
+  display:inline-block;
+  background:white; background:transparentize($bg, 0.1);
+}
+
+@mixin fancy-page($height, $bg-image) {
+  @include parallex-background($height, $bg-image);
+  .banner-overlay { @include background-overlay($height); }
+  .banner-text { margin-top:2em; margin-bottom:2em;
+    h2, p { @include text-overlay; padding:0 25px; }
+    h2 { font-size:emCalc(82px); margin-bottom:10px; text-transform:uppercase; }
+    p { font-size:emCalc(42px); }
+    em { color:$primary-color; font-style:normal; }
+  }
+  .column { color:black; display:inline-block; background:white; background:transparentize(white, 0.2); padding:2em; }
+}
+
+@mixin standard-box-shadow($color:$med-gray) {
+  @include single-box-shadow($color: $color, $hoff: 0, $voff: 0, $blur: 5px);
+}
+
+//
+// Media Queries ++
+//
+@mixin respond-to($media) {
+  @if $media == small {
+    @include min-screen(486) { @content; }
+  }
+  @else if $media == medium {
+    @include min-screen(621) { @content; }
+  }
+}

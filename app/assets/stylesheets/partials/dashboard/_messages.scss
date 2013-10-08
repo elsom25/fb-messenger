@@ -1,0 +1,30 @@
+$pic-height: 250px;
+$small-pic:  50px;
+
+.fb-profile { height:$pic-height !important; overflow:hidden; padding:1em 0.5em !important; cursor:pointer;
+  .img-crop { height:$pic-height; overflow:hidden;
+    img { width:100%; }
+  }
+  h3, h4 { position:relative; color:white; background:black; background:transparentize(black, 0.4); padding:0.1em emCalc(10px); }
+  h3 { top:-76px; height:42px; overflow:hidden; }
+  h4 { top:-168px; }
+}
+.fb-profile.messaged { cursor:default;
+  h3, h4 { background:none; }
+  h3 { top:-105px; text-align:center; }
+  .tint { position:relative; }
+  .tint:before {
+    content:""; display:block;
+    position:absolute; top:0; bottom:0; left:0; right:0;
+    background:black; background:transparentize(black, 0.4);
+    width:100%; height:100%;
+  }
+}
+
+.small-fb-profile { list-style:none; margin:0.5em 0;
+
+}
+
+.controller-dashboard-messages {
+  .pagination { margin:1.25em 0; }
+}

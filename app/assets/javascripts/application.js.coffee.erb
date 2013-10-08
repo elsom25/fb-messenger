@@ -4,10 +4,9 @@
 #= require turbolinks
 
 # FRONT END
-# require twitter/bootstrap
-
-# JS HANDLEBARS TEMPLATES
-# require handlebars.runtime
+#= require foundation
+# require jquery.meow
+# require jquery.livequery
 
 # I18n
 #= require i18n
@@ -30,3 +29,8 @@ stopSpinner = ->
 # Turbolinks Spinner
 document.addEventListener 'page:fetch', startSpinner
 document.addEventListener 'page:receive', stopSpinner
+
+$(document).foundation()
+
+# $ ->
+#   $.meow message:$(el), duration:7500 for el in $('.rails_flash')

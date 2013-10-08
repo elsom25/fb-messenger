@@ -1,0 +1,26 @@
+$img-size:27px;
+$img-margin:($topbar-height - $img-size)/2;
+$topbar-hover-color: $off-white;
+$accent-color: $primary-color;
+
+body > header {
+  .top-bar { @include box-shadow(0 4px $primary-color); }
+}
+
+.base-nav {
+  .header-image { height:$img-size; width:$img-size; margin-right:$img-margin; vertical-align: middle; margin-right: 20.25px; border:1px solid $topbar-link-color; }
+  .icon { height:$topbar-height; font-size:1.2em; }
+}
+
+//
+// OVERRIDES
+//
+.top-bar .top-bar-section > ul > li > a:not(.button) { padding: 0 10px;
+  &:hover { background:$topbar-hover-color; }
+}
+.top-bar-section .has-form { padding-top:$topbar-height/6; }
+.top-bar-section .dropdown {
+  label { color:darken($accent-color, 5%); }
+  // li:hover { background:$topbar-hover-color; }  // TODO: not working for some reason
+}
+.top-bar-section ul li.active > a { background:$accent-color; }

@@ -1,0 +1,12 @@
+//
+// Global
+b, strong { color:$primary-color; font-weight:700; }
+
+::selection { background:$primary-color; color:white; }
+::-moz-selection { background:$primary-color; color:white; }
+
+abbr[title], acronym[title], dfn[title], time[title] { border-bottom:1px solid; cursor:help; }
+abbr, acronym, time { font-size:85%; letter-spacing:0.1em; text-transform:uppercase; }
+time { text-transform:none; }
+
+.rails_flash { display:none; }

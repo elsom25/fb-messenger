@@ -16,6 +16,7 @@ gem 'xmpp4r_facebook'                         # Facebook chat api
 
 gem 'jquery-rails'                            # jQuery
 gem 'jquery-turbolinks'                       # jQuery compatibility with Rails 4
+gem 'modernizr-rails'
 gem 'gon'                                     # Rails vars in JS
 gem 'i18n-js'                                 # I18n in JS
 
@@ -29,9 +30,8 @@ gem 'therubyracer'
 gem 'turbolinks'
 gem 'uglifier',             '>= 1.3.0'
 
-# Zurb Foundation
-gem 'modernizr-rails'
-gem 'compass-rails',        '>= 1.0.3'
+gem 'compass-rails',        '~> 2.0.alpha.0'
+gem 'font-awesome-rails'
 gem 'zurb-foundation'
 
 # Multi-environment configuration

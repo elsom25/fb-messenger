@@ -20,10 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  account:
+    login:              "Login with Facebook"
+    logout:             "Logout"
   app:
-    title: "Omniauth Rails (codecase)"
-    subtitle: "Example of OmniAuth implementations in Ruby on Rails 4."
+    title:              "Vote Real"
+    subtitle:           "Example of OmniAuth implementations in Ruby on Rails 4."
   auth:
     twitter_html: "Login with <strong>Twitter</strong>"
     facebook_html: "Login with <strong>Facebook</strong>"
