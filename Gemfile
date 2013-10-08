@@ -1,28 +1,41 @@
 source 'https://rubygems.org'
-
 ruby '2.0.0'
-gem 'rails', '4.0.0'
+
+gem 'rails',                '4.0.0'           # Rails
+gem 'sqlite3', group: [:development, :test]   # Dev & Test DB
+gem 'pg',      group: :production             # Production DB
 
 # Servers
 gem 'puma'
 gem 'unicorn'
 
-gem 'omniauth'
-gem 'omniauth-twitter'
-gem 'omniauth-github'
+gem 'omniauth'                                # OmniAuth
+gem 'omniauth-facebook'                       # Facebook hook
+gem 'koala'                                   # Facebook api
+gem 'xmpp4r_facebook'                         # Facebook chat api
+
+gem 'jquery-rails'                            # jQuery
+gem 'jquery-turbolinks'                       # jQuery compatibility with Rails 4
+gem 'gon'                                     # Rails vars in JS
+gem 'i18n-js'                                 # I18n in JS
+
+# Assets
+gem 'sass-rails',           '~> 4.0.0'
+gem 'coffee-rails',         '~> 4.0.0'
+gem 'slim'
+gem 'slim-rails'
+
+gem 'therubyracer'
+gem 'turbolinks'
+gem 'uglifier',             '>= 1.3.0'
+
+# Zurb Foundation
+gem 'modernizr-rails'
+gem 'compass-rails',        '>= 1.0.3'
+gem 'zurb-foundation'
 
 # Multi-environment configuration
 # gem 'simpleconfig'
-
-# API
-# gem 'rabl'
-
-# ORM
-gem 'pg'
-
-# Performance and Exception management
-# gem 'airbrake'
-# gem 'newrelic_rpm'
 
 # Security
 # gem 'secure_headers'
@@ -31,23 +44,7 @@ gem 'pg'
 # gem 'google-analytics-rails'
 # gem 'haml'
 # gem 'http_accept_language'
-gem 'jquery-rails'
-gem 'nokogiri'
 # gem 'resque', require: 'resque/server' # Resque web interface
-
-# Assets
-gem 'coffee-rails', '~> 4.0.0'
-# gem 'haml_assets'
-
-# gem 'handlebars_assets'
-gem 'i18n-js'
-gem 'jquery-turbolinks'
-gem 'less-rails'
-gem 'sass-rails', '~> 4.0.0'
-gem 'therubyracer'
-gem 'turbolinks'
-gem 'twitter-bootstrap-rails', github: 'diowa/twitter-bootstrap-rails', branch: 'fontawesome-3.2.1'
-gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'debugger'
