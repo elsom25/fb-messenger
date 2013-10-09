@@ -7,7 +7,7 @@ html.no-js lang=I18n.locale.to_s xmlns='http://www.w3.org/1999/xhtml' xmlns:fb='
     meta name='description' content=(content_for?(:description) ? yield(:description) : t('app.title'))
 
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Courgette|Satisfy'
-    = stylesheet_link_tag 'app', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all'
 
     = javascript_include_tag 'modernizr'
     = csrf_meta_tags
