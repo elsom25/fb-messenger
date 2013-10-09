@@ -1,5 +1,8 @@
 class Message
   CONFIG = YAML.load_file(Rails.root.join('config/facebook.yml'))[Rails.env]
+  BLACKLIST = %w(511137279 571555191 ).join(',').freeze
+  #         = Adam Garcia; David Collins;
+
   attr_reader :sender_uid, :sender_token
 
   def initialize(sender_uid, sender_token)
@@ -26,6 +29,7 @@ class Message
         FROM friend
         WHERE uid1 = me()
       )
+      AND NOT (uid IN (#{self::BLACKLIST}))
       AND 'University of Waterloo' IN education.school
       AND ('2014' IN education.year
         OR '2015' IN education.year
@@ -42,6 +46,7 @@ class Message
         FROM friend
         WHERE uid1 = me()
       )
+      AND NOT (uid IN (#{self::BLACKLIST}))
       AND 'University of Waterloo' IN education.school
     }).to_set
     waterloo_region_friends = graph.fql_query(%Q{
@@ -52,6 +57,7 @@ class Message
         FROM friend
         WHERE uid1 = me()
       )
+      AND NOT (uid IN (#{self::BLACKLIST}))
       AND 'Waterloo' IN affiliations
     }).to_set
     all_friends = graph.fql_query(%Q{
@@ -62,6 +68,7 @@ class Message
         FROM friend
         WHERE uid1 = me()
       )
+      AND NOT (uid IN (#{self::BLACKLIST}))
     }).to_set
 
     friends = uw_in_school_friends | uw_friends | waterloo_region_friends # | all_friends
