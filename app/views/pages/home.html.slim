@@ -6,6 +6,6 @@
     - if logged_in?
       a.btn href=logout_path = t('auth.logout')
     - else
-      a.button href="/auth/facebook"
+      a.button href=login_path
         i.icon-facebook'
         = t('auth.facebook_html')

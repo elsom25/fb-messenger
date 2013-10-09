@@ -33,6 +33,7 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    brwsr (1.1.1)
     builder (3.1.4)
     bullet (4.6.0)
       uniform_notifier
@@ -215,6 +216,8 @@ GEM
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
+    secure_headers (1.0.0)
+      brwsr (>= 1.1.1)
     selenium-webdriver (2.35.1)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
@@ -317,6 +320,7 @@ DEPENDENCIES
   rspec
   rspec-rails
   sass-rails (~> 4.0.0)
+  secure_headers
   selenium-webdriver
   simplecov
   slim

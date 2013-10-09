@@ -1,3 +1,3 @@
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    = content_tag :div, msg, class: 'rails_flash rails_flash_#{name}'
+    .rails_flash class="rails_flash_#{name}" msg

@@ -9,14 +9,19 @@ gem 'pg',      group: :production             # Production DB
 gem 'puma'
 gem 'unicorn'
 
+# Auth
 gem 'omniauth'                                # OmniAuth
 gem 'omniauth-facebook'                       # Facebook hook
 gem 'koala'                                   # Facebook api
 gem 'xmpp4r_facebook'                         # Facebook chat api
 
+# Security
+gem 'secure_headers'
+
+# Javascript
 gem 'jquery-rails'                            # jQuery
 gem 'jquery-turbolinks'                       # jQuery compatibility with Rails 4
-gem 'modernizr-rails'
+gem 'modernizr-rails'                         # Modernizr
 gem 'gon'                                     # Rails vars in JS
 gem 'i18n-js'                                 # I18n in JS
 
@@ -25,25 +30,13 @@ gem 'sass-rails',           '~> 4.0.0'
 gem 'coffee-rails',         '~> 4.0.0'
 gem 'slim'
 gem 'slim-rails'
-
-gem 'therubyracer'
-gem 'turbolinks'
-gem 'uglifier',             '>= 1.3.0'
-
 gem 'compass-rails',        '~> 2.0.alpha.0'
 gem 'font-awesome-rails'
 gem 'zurb-foundation'
 
-# Multi-environment configuration
-# gem 'simpleconfig'
-
-# Security
-# gem 'secure_headers'
-
-# Miscellanea
-# gem 'google-analytics-rails'
-# gem 'haml'
-# gem 'http_accept_language'
+gem 'therubyracer'
+gem 'turbolinks'                              # Makes page loads faster
+gem 'uglifier',             '>= 1.3.0'
 
 group :development, :test do
   gem 'debugger'

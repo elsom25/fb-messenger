@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  ensure_security_headers
 
   before_filter :current_user
 
@@ -32,9 +33,8 @@ protected
   end
 
   def authenticate_user!
-    if session.has_key?(:user_id)
-      current_user
-    else
+    unless logged_in?
+      flash[:error] = 'You must be signed in to access this page.'
       redirect_to redirect_path
     end
   end
