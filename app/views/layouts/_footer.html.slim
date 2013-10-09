@@ -1,0 +1,26 @@
+.row
+  .small-12.columns
+    ul.side-nav.left
+      li= link_to t('app.title'), root_path
+
+    ul.inline-list.right
+      li
+        ul.side-nav
+          - if DateTime.now > PlatformDashboard::Application.config.election_date
+            li= link_to '//vote.feds.ca/', target: :_blank, rel: :external do
+              | Vote Now &raquo;
+          - else
+            li Voting in #{distance_of_time_in_words(DateTime.now, PlatformDashboard::Application.config.election_date)}
+
+.row
+  .small-12.columns
+    ul.inline-list.right.social-menu
+      li
+        = link_to 'mailto:voterealfeds@gmail.com', class: 'social-icon', title: 'Send us a message' do
+          i.icon-envelope
+      li
+        = link_to '//twitter.com/VoteReal', target: '_blank', class: 'social-icon', title: 'Follow us on Twitter' do
+          i.icon-twitter
+      li
+        = link_to '//fb.me/jcmcginnis', target: '_blank', class: 'social-icon', title: 'Like us on Facebook' do
+          i.icon-facebook

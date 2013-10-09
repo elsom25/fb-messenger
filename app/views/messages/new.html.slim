@@ -1,0 +1,12 @@
+.row
+  .small-12.columns
+    h1 Hello, #{@me.name}!
+
+.row
+  .small-12.columns
+    ul.large-block-grid-3
+      - @friends.each do |friend|
+        li.fb-profile
+          .img-crop
+            = image_tag "http://graph.facebook.com/#{friend['uid']}/picture?width=330&height=250"
+          h3 data-uid=friend['uid'] = friend['name']

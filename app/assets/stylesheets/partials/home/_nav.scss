@@ -4,7 +4,7 @@ $topbar-hover-color: $off-white;
 $accent-color: $primary-color;
 
 body > header {
-  .top-bar { @include box-shadow(0 4px $primary-color); }
+  @include box-shadow(0 4px $primary-color);
 }
 
 .base-nav {

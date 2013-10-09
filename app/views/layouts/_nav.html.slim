@@ -1,7 +1,5 @@
 ul.right
   - if logged_in?
-    li Hi #{current_user.name}!
     = nav_link t('auth.logout'), logout_path
-
   - else
     = nav_link t('auth.login'), login_path

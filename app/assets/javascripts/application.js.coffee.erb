@@ -5,8 +5,7 @@
 
 # FRONT END
 #= require foundation
-# require jquery.meow
-# require jquery.livequery
+#= require jquery.meow
 
 # I18n
 #= require i18n
@@ -29,8 +28,3 @@ stopSpinner = ->
 # Turbolinks Spinner
 document.addEventListener 'page:fetch', startSpinner
 document.addEventListener 'page:receive', stopSpinner
-
-$(document).foundation()
-
-# $ ->
-#   $.meow message:$(el), duration:7500 for el in $('.rails_flash')

@@ -24,17 +24,18 @@ html.no-js lang=I18n.locale.to_s xmlns='http://www.w3.org/1999/xhtml' xmlns:fb='
 
     /! [Begin] Navigation
     header
-      nav.top-bar.base-nav
-        /! Title Area
-        ul.title-area
-          li.name
-            h1= link_to t('app.title'), root_path
-          li.toggle-topbar.menu-icon: a href="#"
-            span Menu
+      .contain-to-grid
+        nav.top-bar.base-nav
+          /! Title Area
+          ul.title-area
+            li.name
+              h1= link_to t('app.title'), root_path
+            li.toggle-topbar.menu-icon: a href="#"
+              span Menu
 
-        /! Content
-        section.top-bar-section
-          = render 'layouts/nav'
+          /! Content
+          section.top-bar-section
+            = render 'layouts/nav'
     /! [End] Navigation
 
     /! [Begin] Content

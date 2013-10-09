@@ -16,16 +16,9 @@
 html { background-color:$footer-extra-bg; }
 body > footer { background:$footer-bg; border-bottom: emCalc(7px) solid $footer-extra-bg; margin-top:$footer-spacing; padding-top:$footer-spacing;
 
-  .show-for-medium-up {
-    & > .row {
-      &:first-child { border-bottom:1px solid $divider-bg; }
-      &:last-child { margin-bottom:$footer-spacing*2; }
-    }
-  }
-  .show-for-small {
-    .left   { text-align:left; }
-    .center { text-align:center; }
-    .right  { text-align:right; }
+  & > .row {
+    &:first-child { border-bottom:1px solid $divider-bg; }
+    &:last-child { margin-bottom:$footer-spacing*2; }
   }
 
   .inline-list { margin-bottom:0; }

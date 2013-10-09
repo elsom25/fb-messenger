@@ -1,11 +1,6 @@
 class ServicesController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
-  def index
-    @providers     ||= omniauth_providers
-    @user_services   = current_user.services
-  end
-
   def create
     current_service = Service.where(provider: omnihash[:provider], uid: omnihash[:uid]).first
 
@@ -29,7 +24,6 @@ class ServicesController < ApplicationController
       else
         user         = User.new
         user.name    = omnihash[:info][:nickname]
-        user.name    = omnihash[:info][:name] if omnihash[:provider].to_s == "developer"
         user.email   = omnihash[:info][:email]
         user_service = user.services.build({
           provider: omnihash[:provider],
@@ -47,7 +41,7 @@ class ServicesController < ApplicationController
       end
     end
 
-    redirect_to services_path
+    redirect_to redirect_path
   end
 
   def destroy
@@ -74,6 +68,6 @@ private
   end
 
   def redirect_path
-    :services
+    :messages
   end
 end

@@ -17,7 +17,7 @@
 # development:
 #   adapter: postgresql
 #   encoding: unicode
-#   database: starterapp_development
+#   database: PlatformDashboard_development
 #   pool: 5
 #   username: postgres
 #   password:
@@ -53,7 +53,7 @@ development:
 # test:
 #   adapter: postgresql
 #   encoding: unicode
-#   database: starterapp_test
+#   database: PlatformDashboard_test
 #   pool: 5
 #   username: postgres
 #   password:
@@ -67,7 +67,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: starterapp_production
+  database: PlatformDashboard_production
   pool: 5
   username: postgres
   password:

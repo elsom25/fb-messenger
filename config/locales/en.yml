@@ -21,19 +21,17 @@
 
 en:
   account:
-    login:              "Login with Facebook"
-    logout:             "Logout"
+    login:              'Login with Facebook'
+    logout:             'Logout'
   app:
-    title:              "Vote Real"
-    subtitle:           "Example of OmniAuth implementations in Ruby on Rails 4."
+    title:              'Vote Real Dashboard'
+    subtitle:           'Example of OmniAuth implementations in Ruby on Rails 4.'
   auth:
-    facebook_html:      "Login with Facebook"
-    developer_html:     "Login as developer"
-    logout: "Logout"
+    facebook_html:      'Login with Facebook'
+    logout:             'Logout'
   notifications:
-    account_created: 'Your account has been created and you have been logged in!'
+    account_created:    'Your account has been created and you have been logged in!'
     provider_already_connected: 'Your account at %{provider} is already connected!.'
-    provider_added: 'Your %{provider} account has been added for logging in!.'
-    provider_unlinked: 'Your %{provider} account has been unlinked!.'
+    provider_added:     'Your %{provider} account has been added for logging in!.'
+    provider_unlinked:  'Your %{provider} account has been unlinked!.'
     authentication_error: 'There was an error at the remote authentication service!.'
-

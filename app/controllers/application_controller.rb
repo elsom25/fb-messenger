@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   ensure_security_headers
 
   before_filter :current_user
+  before_filter :setup_fb_graph, :setup_fb_config
 
   helper_method :logged_in?
   helper_method :current_user
@@ -33,10 +34,10 @@ protected
   end
 
   def authenticate_user!
-    unless logged_in?
-      flash[:error] = 'You must be signed in to access this page.'
-      redirect_to redirect_path
-    end
+    return if logged_in?
+
+    flash[:error] = 'You must be signed in to access this page.'
+    redirect_to redirect_path
   end
 
   def logout!
@@ -46,5 +47,23 @@ protected
 
   def redirect_path
     :root
+  end
+
+  def setup_fb_config
+    @fb_app_id ||= YAML.load_file(Rails.root.join('config/facebook.yml'))[Rails.env]['fb_app_id']
+  end
+
+  def setup_fb_graph
+    return unless session[:oauth_token]
+
+    @graph ||= Koala::Facebook::API.new session[:oauth_token]
+    @me ||= @graph.get_object 'me' do |data|
+      OpenStruct.new(
+        name: data['first_name'],
+        profile_path: @graph.get_picture(data['id']),
+        gender: data['gender'],
+        email: data['email']
+      )
+    end
   end
 end

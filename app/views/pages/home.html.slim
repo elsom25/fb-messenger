@@ -1,8 +1,6 @@
 .row
-  .twelve.columns
-    h1
-      ' Tools to help you
-      em= t('app.title')
+  .small-12.columns
+    h1= t('app.title')
     - if logged_in?
       a.btn href=logout_path = t('auth.logout')
     - else
