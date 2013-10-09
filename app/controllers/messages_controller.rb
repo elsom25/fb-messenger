@@ -17,7 +17,7 @@ class MessagesController < AuthenticatedController
 protected
 
   def get_friends
-    @friends = Message.get_all_friends( @graph )
+    @friends = Message.get_friends( @graph ).uw_all
   end
 
 end

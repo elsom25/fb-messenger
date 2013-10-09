@@ -20,8 +20,8 @@ class Message
     client.close
   end
 
-  def self.get_all_friends(graph)
-    uw_in_school_friends = graph.fql_query(%Q{
+  def self.get_friends(graph)
+    uw_in_school_friends_raw = graph.fql_query(%Q{
       SELECT uid, name
       FROM user
       WHERE uid IN (
@@ -29,7 +29,7 @@ class Message
         FROM friend
         WHERE uid1 = me()
       )
-      AND NOT (uid IN (#{self::BLACKLIST}))
+      AND NOT (uid IN (#{BLACKLIST}))
       AND 'University of Waterloo' IN education.school
       AND ('2014' IN education.year
         OR '2015' IN education.year
@@ -38,7 +38,7 @@ class Message
         OR '2018' IN education.year
       )
     }).to_set
-    uw_friends = graph.fql_query(%Q{
+    uw_friends_raw = graph.fql_query(%Q{
       SELECT uid, name
       FROM user
       WHERE uid IN (
@@ -46,10 +46,10 @@ class Message
         FROM friend
         WHERE uid1 = me()
       )
-      AND NOT (uid IN (#{self::BLACKLIST}))
+      AND NOT (uid IN (#{BLACKLIST}))
       AND 'University of Waterloo' IN education.school
     }).to_set
-    waterloo_region_friends = graph.fql_query(%Q{
+    waterloo_region_friends_raw = graph.fql_query(%Q{
       SELECT uid, name
       FROM user
       WHERE uid IN (
@@ -57,10 +57,10 @@ class Message
         FROM friend
         WHERE uid1 = me()
       )
-      AND NOT (uid IN (#{self::BLACKLIST}))
+      AND NOT (uid IN (#{BLACKLIST}))
       AND 'Waterloo' IN affiliations
     }).to_set
-    all_friends = graph.fql_query(%Q{
+    all_friends_raw = graph.fql_query(%Q{
       SELECT uid, name
       FROM user
       WHERE uid IN (
@@ -68,12 +68,19 @@ class Message
         FROM friend
         WHERE uid1 = me()
       )
-      AND NOT (uid IN (#{self::BLACKLIST}))
+      AND NOT (uid IN (#{BLACKLIST}))
     }).to_set
 
-    friends = uw_in_school_friends | uw_friends | waterloo_region_friends # | all_friends
+    uw_friends = uw_in_school_friends_raw | uw_friends_raw
+    waterloo_region_friends = uw_friends  | waterloo_region_friends_raw
+    all_friends = waterloo_region_friends | all_friends_raw
 
-    friends.to_a
+    OpenStruct.new(
+         uw_in_school: uw_in_school_friends_raw.to_a,
+               uw_all: uw_friends.to_a,
+      waterloo_region: waterloo_region_friends.to_a,
+                  all: all_friends.to_a
+    )
   end
 
 protected
