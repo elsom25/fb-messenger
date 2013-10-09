@@ -34,7 +34,6 @@ gem 'compass-rails',        '~> 2.0.alpha.0'
 gem 'font-awesome-rails'
 gem 'zurb-foundation'
 
-gem 'therubyracer'
 gem 'turbolinks'                              # Makes page loads faster
 gem 'uglifier',             '>= 1.3.0'
 
