@@ -27,9 +27,8 @@ en:
     title:              "Vote Real"
     subtitle:           "Example of OmniAuth implementations in Ruby on Rails 4."
   auth:
-    twitter_html: "Login with <strong>Twitter</strong>"
-    facebook_html: "Login with <strong>Facebook</strong>"
-    developer_html: "Login as developer"
+    facebook_html:      "Login with Facebook"
+    developer_html:     "Login as developer"
     logout: "Logout"
   notifications:
     account_created: 'Your account has been created and you have been logged in!'

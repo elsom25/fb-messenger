@@ -1,6 +1,4 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :developer unless Rails.env.production?
-
   CONFIG = YAML.load_file(Rails.root.join('config/facebook.yml'))[Rails.env]
   SCOPE = [
     # General user information
