@@ -9,4 +9,6 @@ abbr[title], acronym[title], dfn[title], time[title] { border-bottom:1px solid; 
 abbr, acronym, time { font-size:85%; letter-spacing:0.1em; text-transform:uppercase; }
 time { text-transform:none; }
 
+input[type="checkbox"], input[type="radio"] { margin:0 1em 0.5em 0; }
+
 .rails_flash { display:none; }

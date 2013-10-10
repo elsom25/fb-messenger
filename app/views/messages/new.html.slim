@@ -4,7 +4,10 @@
 - content_for :modals do
   #submitModal.reveal-modal
     h2 Confirm your submission.
-    p  You are about to mass message a bundle of people. Are you sure?
+    p
+      ' You are about to mass message
+      span#num_people' 0
+      | people. Are you sure?
     input.button.small.radius name='commit' type='submit' value='Send Messages' form='new_message'
     a.close-reveal-modal &#215;
 
@@ -26,7 +29,7 @@
         - friend_group.each do |friend|
           label
             = check_box_tag 'messages[friends_uids][]', friend.to_json, @selected_friends.include?(friend)
-            = friend['name']
+            = truncate(friend['name'], length: 25)
 
   .row
     .small-12.columns
