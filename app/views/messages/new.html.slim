@@ -1,3 +1,13 @@
+- content_for :javascript do
+  = javascript_include_tag 'messages'
+
+- content_for :modals do
+  #submitModal.reveal-modal
+    h2 Confirm your submission.
+    p  You are about to mass message a bundle of people. Are you sure?
+    input.button.small.radius name='commit' type='submit' value='Send Messages' form='new_message'
+    a.close-reveal-modal &#215;
+
 .row
   .small-12.columns
     h1 Hello, #{@me.name}!
@@ -20,4 +30,4 @@
 
   .row
     .small-12.columns
-      = f.submit
+      a.button.medium.radius href='#' data-reveal-id='submitModal' Confirm Messages
