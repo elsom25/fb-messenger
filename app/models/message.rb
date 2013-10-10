@@ -1,7 +1,11 @@
 class Message
+  include ActiveModel::Model
+
   CONFIG = YAML.load_file(Rails.root.join('config/facebook.yml'))[Rails.env]
-  BLACKLIST = %w(511137279 571555191 ).join(',').freeze
+  SELECTION = %w(uid name first_name).join(',').freeze
+  BLACKLIST = %w(511137279 571555191).join(',').freeze
   #         = Adam Garcia; David Collins;
+
 
   attr_reader :sender_uid, :sender_token
 
@@ -10,11 +14,13 @@ class Message
     @sender_token = sender_token
   end
 
-  def send_mass_message(receiver_uid_list, body, subject=nil)
+  def send_mass_message(friend_list, body, subject=nil)
     client = create_client
 
-    receiver_uid_list.each do |uid|
-      client.send create_message(uid, body, subject)
+    friend_list.each do |friend|
+      templated_body = "hey #{friend.first_name.downcase},\n\n#{body}"
+      message = create_message(friend.uid, templated_body, subject)
+      client.send message
     end
 
     client.close
@@ -22,7 +28,7 @@ class Message
 
   def self.get_friends(graph)
     uw_in_school_friends_raw = graph.fql_query(%Q{
-      SELECT uid, name
+      SELECT #{SELECTION}
       FROM user
       WHERE uid IN (
         SELECT uid2
@@ -39,7 +45,7 @@ class Message
       )
     }).to_set
     uw_friends_raw = graph.fql_query(%Q{
-      SELECT uid, name
+      SELECT #{SELECTION}
       FROM user
       WHERE uid IN (
         SELECT uid2
@@ -50,7 +56,7 @@ class Message
       AND 'University of Waterloo' IN education.school
     }).to_set
     waterloo_region_friends_raw = graph.fql_query(%Q{
-      SELECT uid, name
+      SELECT #{SELECTION}
       FROM user
       WHERE uid IN (
         SELECT uid2
@@ -61,7 +67,7 @@ class Message
       AND 'Waterloo' IN affiliations
     }).to_set
     all_friends_raw = graph.fql_query(%Q{
-      SELECT uid, name
+      SELECT #{SELECTION}
       FROM user
       WHERE uid IN (
         SELECT uid2

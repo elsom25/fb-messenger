@@ -1,5 +1,0 @@
-.controller-dashboard-home.action-profile {
-  .sparkline, .jqstooltop {
-    &, * { &, &:before, &:after { @include box-sizing(content-box); } }
-  }
-}

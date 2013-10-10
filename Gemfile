@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 gem 'rails',                '4.0.0'           # Rails
+gem 'turbolinks'                              # Makes page loads faster
 gem 'sqlite3', group: [:development, :test]   # Dev & Test DB
 gem 'pg',      group: :production             # Production DB
 
@@ -33,7 +34,6 @@ gem 'compass-rails',        '~> 2.0.alpha.0'
 gem 'font-awesome-rails'
 gem 'zurb-foundation'
 
-gem 'turbolinks'                              # Makes page loads faster
 gem 'uglifier',             '>= 1.3.0'
 
 group :development, :test do
