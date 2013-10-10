@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_service
 
+  rescue_from ActionController::RoutingError, with: :go_home
+
 protected
 
   def current_user
@@ -34,15 +36,16 @@ protected
   end
 
   def authenticate_user!
-    return if logged_in?
-
-    flash[:error] = 'You must be signed in to access this page.'
-    redirect_to redirect_path
+    go_home unless logged_in?
   end
 
   def logout!
     @current_user = nil
     reset_session
+  end
+
+  def go_home
+    redirect_to redirect_path
   end
 
   def redirect_path
