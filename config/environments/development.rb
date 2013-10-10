@@ -27,6 +27,9 @@ PlatformDashboard::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # Indent html for pretty debugging and do not sort attributes
+  Slim::Engine.set_default_options pretty: true, sort_attrs: false
+
   # Bullet
   config.after_initialize do
     Bullet.enable = true

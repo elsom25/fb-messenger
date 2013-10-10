@@ -28,7 +28,6 @@ gem 'i18n-js'                                 # I18n in JS
 # Assets
 gem 'sass-rails',           '~> 4.0.0'
 gem 'coffee-rails',         '~> 4.0.0'
-gem 'slim'
 gem 'slim-rails'
 gem 'compass-rails',        '~> 2.0.alpha.0'
 gem 'font-awesome-rails'
