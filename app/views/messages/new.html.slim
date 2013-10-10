@@ -6,7 +6,7 @@
     h2 Confirm your submission.
     p
       ' You are about to mass message
-      span#num_people' 0
+      span.num_friends_selected' 0
       | people. Are you sure?
     input.button.small.radius name='commit' type='submit' value='Send Messages' form='new_message'
     a.close-reveal-modal &#215;
@@ -15,22 +15,45 @@
   .small-12.columns
     h1 Hello, #{@me.name}!
 
+.row
+  .small-12.columns
+    p.lead Message your friends and encourage them to learn more, get involved, and most importantly, <b>Vote Real</b>.
+    p Select who you would like to message, and fill in as many of the message boxes as you'd like. When messages are being sent, it will randomly select from the messages you fill in. If you only fill in one, all people will be messaged the same thing.
+    p Every message is placed in a template, to be structured like:
+    pre
+      | hello (NAME),
+      br
+      | (YOUR MESSAGE)
+    br
+
 = form_for @message do |f|
   .row
-    - 6.times do |i|
-      .small-6.columns
-        label
-          | Message #{i+1}
-          = text_area_tag 'messages[messages][]'
-
-  .row
-    - @friends.in_groups(4, false) do |friend_group|
-      .large-3.small-6.columns
-        - friend_group.each do |friend|
+    fieldset
+      legend
+        | Messages (
+        span.num_messages_selected 0
+        | )
+      - 6.times do |i|
+        .small-6.columns
           label
-            = check_box_tag 'messages[friends_uids][]', friend.to_json, @selected_friends.include?(friend)
-            = truncate(friend['name'], length: 25)
+            | Message #{i+1}
+            = text_area_tag 'messages[messages][]', nil, id: "message_#{i+1}"
 
   .row
-    .small-12.columns
-      a.button.medium.radius href='#' data-reveal-id='submitModal' Confirm Messages
+    fieldset
+      legend
+        | Friends (
+        span.num_friends_selected 0
+        | )
+      - @friends.in_groups(4, false) do |friend_group|
+        .large-3.small-6.columns
+          - friend_group.each do |friend|
+            label
+              = check_box_tag 'messages[friends_uids][]', friend.to_json, @selected_friends.include?(friend)
+              = truncate(friend['name'], length: 25)
+
+  .row
+    fieldset
+      legend Actions
+      .small-12.columns
+        a.button.medium.radius href='#' data-reveal-id='submitModal' Confirm Messages

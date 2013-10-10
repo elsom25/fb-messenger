@@ -10,5 +10,8 @@ abbr, acronym, time { font-size:85%; letter-spacing:0.1em; text-transform:upperc
 time { text-transform:none; }
 
 input[type="checkbox"], input[type="radio"] { margin:0 1em 0.5em 0; }
+fieldset { border-color:#bbb;
+  legend { background:none; }
+}
 
 .rails_flash { display:none; }
