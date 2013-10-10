@@ -1,6 +1,5 @@
 // project libraries
 @import 'lib/jquery.meow.scss';
-@import 'lib/jquery.meow.override.scss';
 
 // project settings and frameworks
 @import 'modules/base';
@@ -9,3 +8,6 @@
 @import 'partials/globals';
 @import 'partials/home/base';
 @import 'partials/dashboard/base';
+
+// project library overrides
+@import 'lib/jquery.meow.override.scss';
