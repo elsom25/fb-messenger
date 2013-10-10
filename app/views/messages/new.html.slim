@@ -2,12 +2,16 @@
   = javascript_include_tag 'messages'
 
 - content_for :modals do
-  #submitModal.reveal-modal
+  #submitModal.reveal-modal.medium
     h2 Confirm your submission.
     p
       ' You are about to mass message
       span.num_friends_selected' 0
-      | people. Are you sure?
+      | friends.
+
+    p You are messaging your friends randomly one of:
+    ol#message_list
+
     input.button.small.radius name='commit' type='submit' value='Send Messages' form='new_message'
     a.close-reveal-modal &#215;
 

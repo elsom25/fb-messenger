@@ -1,5 +1,7 @@
 'use strict'
 $ ->
+  nl2br = (str) -> (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2')
+
   $form = $('#new_message')
   messages       = []
 
@@ -26,7 +28,12 @@ $ ->
     num_friends = $form.find('input:checked').length
     $('.num_friends_selected').text num_friends
 
-  # $('#submitModal').foundation 'reveal',
-  #   open: ->
-  #     UPDATE_MESSAGES
-  #     return
+  $('#submitModal').foundation 'reveal',
+    open: ->
+      $msg_list = $('#message_list')
+      $msg_list.empty()
+      for msg_id in messages
+        msg = $("##{msg_id}").val()
+        $msg_list.append( "<li>#{nl2br("hey (NAME),\n#{msg}")}</li>" )
+
+      return
