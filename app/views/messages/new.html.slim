@@ -4,13 +4,20 @@
 
 = form_for @message do |f|
   .row
-    .small-4.columns
-      - @friends.each do |friend|
+    - 6.times do |i|
+      .small-6.columns
         label
-          = check_box_tag 'messages[friends_uids][]', friend.to_json, @selected_friends.include?(friend)
-          = friend['name']
-    .small-8.columns
-      label
-        | Message
-        = text_area_tag 'messages[message]'
+          | Message #{i+1}
+          = text_area_tag 'messages[messages][]'
+
+  .row
+    - @friends.in_groups(4, false) do |friend_group|
+      .large-3.small-6.columns
+        - friend_group.each do |friend|
+          label
+            = check_box_tag 'messages[friends_uids][]', friend.to_json, @selected_friends.include?(friend)
+            = friend['name']
+
+  .row
+    .small-12.columns
       = f.submit

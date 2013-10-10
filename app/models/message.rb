@@ -4,7 +4,7 @@ class Message
   CONFIG = YAML.load_file(Rails.root.join('config/facebook.yml'))[Rails.env]
   SELECTION = %w(uid name first_name).join(',').freeze
   BLACKLIST = %w(511137279 571555191).join(',').freeze
-  #         = Adam Garcia; David Collins;
+  #BLACKLIST= Adam Garcia; David Collins;
 
 
   attr_reader :sender_uid, :sender_token
@@ -14,11 +14,11 @@ class Message
     @sender_token = sender_token
   end
 
-  def send_mass_message(friend_list, body, subject=nil)
+  def send_mass_message(friend_list, message_list, subject=nil)
     client = create_client
 
     friend_list.each do |friend|
-      templated_body = "hey #{friend.first_name.downcase},\n\n#{body}"
+      templated_body = "hey #{friend.first_name.downcase},\n#{message_list.sample}"
       message = create_message(friend.uid, templated_body, subject)
       client.send message
     end
@@ -118,14 +118,4 @@ protected
     message
   end
 
-end
-
-class MessageResult
-  include ActiveModel::Model
-  attr_accessor :status, :status_message, :num_messages, :points
-
-  def initialize(attributes)
-    super
-    @points ||= 0
-  end
 end
