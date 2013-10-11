@@ -2,7 +2,7 @@
   .small-12.columns
     h1= t('app.title')
     - if logged_in?
-      a.button href=messages_path Send Messages
+      a.button href=new_message_path Send Messages
       a.button href=logout_path = t('auth.logout')
     - else
       a.button href=login_path
