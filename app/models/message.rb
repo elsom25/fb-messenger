@@ -44,45 +44,56 @@ class Message
   end
 
   def self.get_friends(graph)
-    uw_2018 = graph.fql_query(%Q{
-      #{ROOT_QUERY}
-      AND 'University of Waterloo' IN education.school
-      AND '2018' IN education.year
-    }).to_set
-    uw_2017 = graph.fql_query(%Q{
-      #{ROOT_QUERY}
-      AND 'University of Waterloo' IN education.school
-      AND '2017' IN education.year
-    }).to_set
-    uw_2016 = graph.fql_query(%Q{
-      #{ROOT_QUERY}
-      AND 'University of Waterloo' IN education.school
-      AND '2016' IN education.year
-    }).to_set
-    uw_2015 = graph.fql_query(%Q{
-      #{ROOT_QUERY}
-      AND 'University of Waterloo' IN education.school
-      AND '2015' IN education.year
-    }).to_set
-    uw_2014 = graph.fql_query(%Q{
-      #{ROOT_QUERY}
-      AND 'University of Waterloo' IN education.school
-      AND '2014' IN education.year
-    }).to_set
-    uw_2013 = graph.fql_query(%Q{
-      #{ROOT_QUERY}
-      AND 'University of Waterloo' IN education.school
-      AND '2013' IN education.year
-    }).to_set
-    uw = graph.fql_query(%Q{
-      #{ROOT_QUERY}
-      AND 'University of Waterloo' IN education.school
-    }).to_set
-    waterloo_region = graph.fql_query(%Q{
-      #{ROOT_QUERY}
-      AND 'Waterloo' IN affiliations
-    }).to_set
-    all = graph.fql_query("#{ROOT_QUERY}").to_set
+    results = graph.fql_multiquery(
+      uw_2018: %Q{
+        #{ROOT_QUERY}
+        AND 'University of Waterloo' IN education.school
+        AND '2018' IN education.year
+      },
+      uw_2017: %Q{
+        #{ROOT_QUERY}
+        AND 'University of Waterloo' IN education.school
+        AND '2017' IN education.year
+      },
+      uw_2016: %Q{
+        #{ROOT_QUERY}
+        AND 'University of Waterloo' IN education.school
+        AND '2016' IN education.year
+      },
+      uw_2015: %Q{
+        #{ROOT_QUERY}
+        AND 'University of Waterloo' IN education.school
+        AND '2015' IN education.year
+      },
+      uw_2014: %Q{
+        #{ROOT_QUERY}
+        AND 'University of Waterloo' IN education.school
+        AND '2014' IN education.year
+      },
+      uw_2013: %Q{
+        #{ROOT_QUERY}
+        AND 'University of Waterloo' IN education.school
+        AND '2013' IN education.year
+      },
+      uw: %Q{
+        #{ROOT_QUERY}
+        AND 'University of Waterloo' IN education.school
+      },
+      waterloo_region: %Q{
+        #{ROOT_QUERY}
+        AND 'Waterloo' IN affiliations
+      },
+      all: "#{ROOT_QUERY}"
+    )
+    uw_2018         = results['uw_2018'].to_set
+    uw_2017         = results['uw_2017'].to_set
+    uw_2016         = results['uw_2016'].to_set
+    uw_2015         = results['uw_2015'].to_set
+    uw_2014         = results['uw_2014'].to_set
+    uw_2013         = results['uw_2013'].to_set
+    uw              = results['uw'].to_set
+    waterloo_region = results['waterloo_region'].to_set
+    all             = results['all'].to_set
 
     uw_other             = uw - (uw_2018 | uw_2017 | uw_2016 | uw_2015 | uw_2014 | uw_2013)
     waterloo_region_only = waterloo_region - uw

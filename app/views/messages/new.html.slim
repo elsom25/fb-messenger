@@ -75,16 +75,16 @@
             .content#friends(data-section-content)
               dl.sub-nav
                 dt Filters:
-                dd: a.filter data-gon-id='friends_uw_2018' uw_2018
-                dd: a.filter data-gon-id='friends_uw_2017' uw_2017
-                dd: a.filter data-gon-id='friends_uw_2016' uw_2016
-                dd: a.filter data-gon-id='friends_uw_2015' uw_2015
-                dd: a.filter data-gon-id='friends_uw_2014' uw_2014
-                dd: a.filter data-gon-id='friends_uw_2013' uw_2013
-                dd: a.filter data-gon-id='friends_uw_other' uw_other
-                dd: a.filter data-gon-id='friends_waterloo' waterloo_region
-                dd: a.filter data-gon-id='friends_unknown' other_origin
-                dd: a.filter data-gon-id='friends_all' all
+                dd: a.filter.friend_filter data-gon-id='friends_uw_2018' uw_2018
+                dd: a.filter.friend_filter data-gon-id='friends_uw_2017' uw_2017
+                dd: a.filter.friend_filter data-gon-id='friends_uw_2016' uw_2016
+                dd: a.filter.friend_filter data-gon-id='friends_uw_2015' uw_2015
+                dd: a.filter.friend_filter data-gon-id='friends_uw_2014' uw_2014
+                dd: a.filter.friend_filter data-gon-id='friends_uw_2013' uw_2013
+                dd: a.filter.friend_filter data-gon-id='friends_uw_other' uw_other
+                dd: a.filter.friend_filter data-gon-id='friends_waterloo' waterloo_region
+                dd: a.filter.friend_filter data-gon-id='friends_unknown' other_origin
+                dd: a.all_filter data-filter-selector='.friend_filter' all
               .row
                 - @friends.in_groups(4, false) do |friend_group|
                   .large-3.small-6.columns

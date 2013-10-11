@@ -55,12 +55,10 @@ $ ->
     $identifier.click ->
       $parent = $( this ).parent()
       if $parent.hasClass 'active'
-        $parent.toggleClass 'active'
         $.each list, (_, o) -> o.prop( 'checked', false )
-
       else
-        $parent.toggleClass 'active'
         $.each list, (_, o) -> o.prop( 'checked', true )
+      $parent.toggleClass 'active'
       update_num_friends()
       update_num_groups()
 
@@ -68,6 +66,17 @@ $ ->
     $this = $( this )
     enable_filter $this, build_list( gon[$this.data( 'gon-id' )] )
 
+  $( '.all_filter' ).each ->
+    filter_selector = $( this ).data( 'filter-selector' )
+    $( this ).click ->
+      if $( this ).parent().hasClass 'active'
+        $( filter_selector ).each -> $( this ).click() if $( this ).parent().hasClass 'active'
+      else
+        $( filter_selector ).each -> $( this ).click() unless $( this ).parent().hasClass 'active'
+      $( this ).parent().toggleClass 'active'
+
+  #
+  # Update modal on open as needed.
 
   $('#submitModal').foundation 'reveal',
     open: ->
