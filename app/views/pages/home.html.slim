@@ -2,7 +2,8 @@
   .small-12.columns
     h1= t('app.title')
     - if logged_in?
-      a.btn href=logout_path = t('auth.logout')
+      a.button href=messages_path Send Messages
+      a.button href=logout_path = t('auth.logout')
     - else
       a.button href=login_path
         i.icon-facebook'
