@@ -33,8 +33,18 @@ class MessagesController < AuthenticatedController
 protected
 
   def get_connections
-    @friends = Message.get_friends( @graph ).uw_all
-    @groups  = Message.get_groups_and_pages( @graph ).all
+    friends  = Message.get_friends( @graph )
+    groups   = Message.get_groups_and_pages( @graph )
+
+    @friends = friends.uw_all
+    gon.friends_uw_in_school    = friends.uw_in_school
+    gon.friends_uw_all          = friends.uw_all
+    gon.friends_waterloo_region = friends.waterloo_region
+    gon.friends_all             = friends.all
+
+    @groups  = groups.all
+    gon.groups = groups.groups
+    gon.pages  = groups.pages
   end
 
   def set_view_variables

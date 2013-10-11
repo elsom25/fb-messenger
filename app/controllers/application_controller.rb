@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_service
 
-  rescue_from ActionController::RoutingError, with: :go_home
+  # rescue_from ActionController::RoutingError, with: :go_home
 
 protected
 

@@ -43,6 +43,24 @@ $ ->
   update_num_groups()
   $form.find('#groups input:checkbox').on 'change', -> update_num_groups()
 
+  #
+  # Filters!
+
+  window.$friends_uw_in_school = []
+  window.$friends_uw_in_school.push( $("#friends input:checkbox[value='#{JSON.stringify(val)}']") ) for val in gon.friends_uw_in_school
+  $('#uw-in-school').click ->
+    $this = $(this)
+    if $this.data( 'clicked' )
+      console.log 'CLICKED'
+      $this.data( 'clicked', false )
+      $.each $friends_uw_in_school, (_, o) -> o.prop('checked', false)
+
+    else
+      console.log 'NOT CLICKED'
+      $this.data( 'clicked', true )
+      $.each $friends_uw_in_school, (_, o) -> o.prop('checked', true)
+
+
   $('#submitModal').foundation 'reveal',
     open: ->
       $private_msg_list = $('#private_message_list')

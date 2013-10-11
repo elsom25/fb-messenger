@@ -74,6 +74,9 @@
                 | )
             .content#friends(data-section-content)
               .row
+                .small-12.columns
+                  a#uw-in-school uw_in_school
+              .row
                 - @friends.in_groups(4, false) do |friend_group|
                   .large-3.small-6.columns
                     - friend_group.each do |friend|
