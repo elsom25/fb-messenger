@@ -36,7 +36,7 @@ protected
     friends  = Message.get_friends( @graph )
     groups   = Message.get_groups_and_pages( @graph )
 
-    @friends = friends.uw_all
+    @friends = friends.all
     gon.friends_uw_in_school    = friends.uw_in_school
     gon.friends_uw_all          = friends.uw_all
     gon.friends_waterloo_region = friends.waterloo_region

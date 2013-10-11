@@ -46,19 +46,25 @@ $ ->
   #
   # Filters!
 
-  window.$friends_uw_in_school = []
-  window.$friends_uw_in_school.push( $("#friends input:checkbox[value='#{JSON.stringify(val)}']") ) for val in gon.friends_uw_in_school
-  $('#uw-in-school').click ->
-    $this = $(this)
-    if $this.data( 'clicked' )
-      console.log 'CLICKED'
-      $this.data( 'clicked', false )
-      $.each $friends_uw_in_school, (_, o) -> o.prop('checked', false)
+  build_list = (list) ->
+    arr = []
+    arr.push( $("input:checkbox[value='#{JSON.stringify(val)}']") ) for val in list
+    return arr
 
-    else
-      console.log 'NOT CLICKED'
-      $this.data( 'clicked', true )
-      $.each $friends_uw_in_school, (_, o) -> o.prop('checked', true)
+  enable_filter = ($identifier, list) ->
+    $identifier.click ->
+      $this = $( this )
+      if $this.data( 'clicked' )
+        $this.data( 'clicked', false )
+        $.each list, (_, o) -> o.prop('checked', false)
+
+      else
+        $this.data( 'clicked', true )
+        $.each list, (_, o) -> o.prop('checked', true)
+
+  $( '.filter' ).each ->
+    $this = $( this )
+    enable_filter $this, build_list( gon[$this.data( 'gon-id' )] )
 
 
   $('#submitModal').foundation 'reveal',

@@ -75,7 +75,10 @@
             .content#friends(data-section-content)
               .row
                 .small-12.columns
-                  a#uw-in-school uw_in_school
+                  a.filter data-gon-id='friends_uw_in_school' uw_in_school
+                  a.filter data-gon-id='friends_uw_all' uw_all
+                  a.filter data-gon-id='friends_waterloo_region' waterloo_region
+                  a.filter data-gon-id='friends_all' all
               .row
                 - @friends.in_groups(4, false) do |friend_group|
                   .large-3.small-6.columns
