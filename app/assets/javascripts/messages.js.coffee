@@ -53,14 +53,16 @@ $ ->
 
   enable_filter = ($identifier, list) ->
     $identifier.click ->
-      $this = $( this )
-      if $this.data( 'clicked' )
-        $this.data( 'clicked', false )
-        $.each list, (_, o) -> o.prop('checked', false)
+      $parent = $( this ).parent()
+      if $parent.hasClass 'active'
+        $parent.toggleClass 'active'
+        $.each list, (_, o) -> o.prop( 'checked', false )
 
       else
-        $this.data( 'clicked', true )
-        $.each list, (_, o) -> o.prop('checked', true)
+        $parent.toggleClass 'active'
+        $.each list, (_, o) -> o.prop( 'checked', true )
+      update_num_friends()
+      update_num_groups()
 
   $( '.filter' ).each ->
     $this = $( this )

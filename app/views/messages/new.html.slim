@@ -3,12 +3,12 @@
     h3 Confirm your submission.
     p
       ' You are about to mass private message
-      strong.num_friends_selected' 0
+      strong.num_friends_selected' 0000
       | friends.
 
     p
       ' You are about to mass wall post
-      strong.num_groups_selected' 0
+      strong.num_groups_selected' 0000
       | groups.
 
     p Your messages will be randomly chosen from:
@@ -73,12 +73,18 @@
                 span.num_friends_selected 0
                 | )
             .content#friends(data-section-content)
-              .row
-                .small-12.columns
-                  a.filter data-gon-id='friends_uw_in_school' uw_in_school
-                  a.filter data-gon-id='friends_uw_all' uw_all
-                  a.filter data-gon-id='friends_waterloo_region' waterloo_region
-                  a.filter data-gon-id='friends_all' all
+              dl.sub-nav
+                dt Filters:
+                dd: a.filter data-gon-id='friends_uw_2018' uw_2018
+                dd: a.filter data-gon-id='friends_uw_2017' uw_2017
+                dd: a.filter data-gon-id='friends_uw_2016' uw_2016
+                dd: a.filter data-gon-id='friends_uw_2015' uw_2015
+                dd: a.filter data-gon-id='friends_uw_2014' uw_2014
+                dd: a.filter data-gon-id='friends_uw_2013' uw_2013
+                dd: a.filter data-gon-id='friends_uw_other' uw_other
+                dd: a.filter data-gon-id='friends_waterloo' waterloo_region
+                dd: a.filter data-gon-id='friends_unknown' other_origin
+                dd: a.filter data-gon-id='friends_all' all
               .row
                 - @friends.in_groups(4, false) do |friend_group|
                   .large-3.small-6.columns

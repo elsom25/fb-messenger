@@ -5,7 +5,16 @@ class Message
   SELECTION = %w(uid name first_name).join(',').freeze
   BLACKLIST = %w(511137279 571555191).join(',').freeze
   #BLACKLIST= Adam Garcia; David Collins;
-
+  ROOT_QUERY = %Q{
+    SELECT #{SELECTION}
+    FROM user
+    WHERE uid IN (
+      SELECT uid2
+      FROM friend
+      WHERE uid1 = me()
+    )
+    AND NOT (uid IN (#{BLACKLIST}))
+  }
 
   attr_reader :sender_uid, :sender_token, :graph
 
@@ -35,65 +44,61 @@ class Message
   end
 
   def self.get_friends(graph)
-    uw_in_school_friends_raw = graph.fql_query(%Q{
-      SELECT #{SELECTION}
-      FROM user
-      WHERE uid IN (
-        SELECT uid2
-        FROM friend
-        WHERE uid1 = me()
-      )
-      AND NOT (uid IN (#{BLACKLIST}))
+    uw_2018 = graph.fql_query(%Q{
+      #{ROOT_QUERY}
       AND 'University of Waterloo' IN education.school
-      AND ('2014' IN education.year
-        OR '2015' IN education.year
-        OR '2016' IN education.year
-        OR '2017' IN education.year
-        OR '2018' IN education.year
-      )
+      AND '2018' IN education.year
     }).to_set
-    uw_friends_raw = graph.fql_query(%Q{
-      SELECT #{SELECTION}
-      FROM user
-      WHERE uid IN (
-        SELECT uid2
-        FROM friend
-        WHERE uid1 = me()
-      )
-      AND NOT (uid IN (#{BLACKLIST}))
+    uw_2017 = graph.fql_query(%Q{
+      #{ROOT_QUERY}
+      AND 'University of Waterloo' IN education.school
+      AND '2017' IN education.year
+    }).to_set
+    uw_2016 = graph.fql_query(%Q{
+      #{ROOT_QUERY}
+      AND 'University of Waterloo' IN education.school
+      AND '2016' IN education.year
+    }).to_set
+    uw_2015 = graph.fql_query(%Q{
+      #{ROOT_QUERY}
+      AND 'University of Waterloo' IN education.school
+      AND '2015' IN education.year
+    }).to_set
+    uw_2014 = graph.fql_query(%Q{
+      #{ROOT_QUERY}
+      AND 'University of Waterloo' IN education.school
+      AND '2014' IN education.year
+    }).to_set
+    uw_2013 = graph.fql_query(%Q{
+      #{ROOT_QUERY}
+      AND 'University of Waterloo' IN education.school
+      AND '2013' IN education.year
+    }).to_set
+    uw = graph.fql_query(%Q{
+      #{ROOT_QUERY}
       AND 'University of Waterloo' IN education.school
     }).to_set
-    waterloo_region_friends_raw = graph.fql_query(%Q{
-      SELECT #{SELECTION}
-      FROM user
-      WHERE uid IN (
-        SELECT uid2
-        FROM friend
-        WHERE uid1 = me()
-      )
-      AND NOT (uid IN (#{BLACKLIST}))
+    waterloo_region = graph.fql_query(%Q{
+      #{ROOT_QUERY}
       AND 'Waterloo' IN affiliations
     }).to_set
-    all_friends_raw = graph.fql_query(%Q{
-      SELECT #{SELECTION}
-      FROM user
-      WHERE uid IN (
-        SELECT uid2
-        FROM friend
-        WHERE uid1 = me()
-      )
-      AND NOT (uid IN (#{BLACKLIST}))
-    }).to_set
+    all = graph.fql_query("#{ROOT_QUERY}").to_set
 
-    uw_friends = uw_in_school_friends_raw | uw_friends_raw
-    waterloo_region_friends = uw_friends  | waterloo_region_friends_raw
-    all_friends = waterloo_region_friends | all_friends_raw
+    uw_other             = uw - (uw_2018 | uw_2017 | uw_2016 | uw_2015 | uw_2014 | uw_2013)
+    waterloo_region_only = waterloo_region - uw
+    unknown              = all - waterloo_region
 
     OpenStruct.new(
-         uw_in_school: uw_in_school_friends_raw.to_a,
-               uw_all: uw_friends.to_a,
-      waterloo_region: waterloo_region_friends.to_a,
-                  all: all_friends.to_a
+       uw_2018: uw_2018.to_a,
+       uw_2017: uw_2017.to_a,
+       uw_2016: uw_2016.to_a,
+       uw_2015: uw_2015.to_a,
+       uw_2014: uw_2014.to_a,
+       uw_2013: uw_2013.to_a,
+      uw_other: uw_other.to_a,
+      waterloo: waterloo_region_only.to_a,
+       unknown: unknown.to_a,
+           all: all.to_a
     )
   end
 

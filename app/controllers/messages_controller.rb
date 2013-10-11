@@ -37,10 +37,16 @@ protected
     groups   = Message.get_groups_and_pages( @graph )
 
     @friends = friends.all
-    gon.friends_uw_in_school    = friends.uw_in_school
-    gon.friends_uw_all          = friends.uw_all
-    gon.friends_waterloo_region = friends.waterloo_region
-    gon.friends_all             = friends.all
+    gon.friends_uw_2018  = friends.uw_2018
+    gon.friends_uw_2017  = friends.uw_2017
+    gon.friends_uw_2016  = friends.uw_2016
+    gon.friends_uw_2015  = friends.uw_2015
+    gon.friends_uw_2014  = friends.uw_2014
+    gon.friends_uw_2013  = friends.uw_2013
+    gon.friends_uw_other = friends.uw_other
+    gon.friends_waterloo = friends.waterloo
+    gon.friends_unknown  = friends.unknown
+    gon.friends_all      = friends.all
 
     @groups  = groups.all
     gon.groups = groups.groups
