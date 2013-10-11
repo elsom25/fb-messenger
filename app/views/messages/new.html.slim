@@ -99,6 +99,11 @@
                 span.num_groups_selected 0000
                 | )
             .content#groups(data-section-content)
+              dl.sub-nav
+                dt Filters:
+                dd: a.filter.group_filter data-gon-id='groups' groups
+                dd: a.filter.group_filter data-gon-id='pages' pages
+                dd: a.all_filter data-filter-selector='.group_filter' all
               .row
                 - @groups.in_groups(2, false) do |group_group|
                   .small-6.columns

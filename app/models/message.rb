@@ -109,7 +109,7 @@ class Message
       uw_other: uw_other.to_a,
       waterloo: waterloo_region_only.to_a,
        unknown: unknown.to_a,
-           all: all.to_a
+           all: all.sort_by{ |u| u['name'] }
     )
   end
 
@@ -122,7 +122,7 @@ class Message
     OpenStruct.new(
       groups: groups.to_a,
        pages: pages.to_a,
-         all: all.to_a
+         all: all.sort_by{ |g| g['name'] }
     )
   end
 

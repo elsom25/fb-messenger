@@ -46,7 +46,6 @@ protected
     gon.friends_uw_other = friends.uw_other
     gon.friends_waterloo = friends.waterloo
     gon.friends_unknown  = friends.unknown
-    gon.friends_all      = friends.all
 
     @groups  = groups.all
     gon.groups = groups.groups
