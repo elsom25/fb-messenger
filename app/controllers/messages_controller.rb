@@ -1,5 +1,5 @@
 class MessagesController < AuthenticatedController
-  before_filter :get_friends
+  before_filter :get_connections
   before_filter :set_view_variables
 
   def index
@@ -9,34 +9,42 @@ class MessagesController < AuthenticatedController
   def new; end
 
   def create
-    unless params[:messages][:friends_uids]
-      flash[:error] = 'You must select at least 1 friend.'
-      return render :new
-    end
-    @selected_friends = params[:messages][:friends_uids].map{ |f| OpenStruct.new(JSON.parse(f)) }
-
     selected_messages = params[:messages][:messages].select(&:present?)
     unless selected_messages.present?
       flash[:error] = 'You must type at least 1 message.'
       return render :new
     end
 
-    raise 't'
+    friends = params[:messages][:friends_uids]
+    if friends
+      @selected_friends = friends.map{ |f| OpenStruct.new(JSON.parse(f)) }
+      # @message.send_mass_message( @selected_friends, selected_messages )
+    end
 
-    @message.send_mass_message( @selected_friends, selected_messages )
+    groups = params[:messages][:groups_uids]
+    if groups
+      @selected_groups = groups.map{ |g| OpenStruct.new(JSON.parse(g)) }
+      @message.send_mass_post( @selected_groups, selected_messages )
+    end
 
-    redirect_to new_message_path, notice: "Successfully messaged #{ActionController::Base.helpers.pluralize(@selected_friends.length, 'friend')}!"
+    redirect_to new_message_path, notice: "Successfully messaged #{helpers.pluralize(@selected_friends.length, 'friend')} and #{helpers.pluralize(@selected_groups.length, 'group')}!"
   end
 
 protected
 
-  def get_friends
+  def get_connections
     @friends = Message.get_friends( @graph ).uw_all
+    @groups  = Message.get_groups_and_pages( @graph ).all
   end
 
   def set_view_variables
-    @message = Message.new( current_user.fb_uid, session[:oauth_token] )
+    @message = Message.new( current_user.fb_uid, session[:oauth_token], @graph )
     @selected_friends = []#@friends
+    @selected_groups = []#@groups
+  end
+
+  def helpers
+    ActionController::Base.helpers
   end
 
 end

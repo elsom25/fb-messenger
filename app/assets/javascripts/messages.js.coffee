@@ -23,9 +23,25 @@ $ ->
   #
   # Update number of friends selected
 
-  $form.find('input:checkbox').on 'change', ->
-    num_friends = $form.find('input:checked').length
+  num_friends = 0
+  update_num_friends = ->
+    num_friends = $form.find('#friends input:checked').length
     $('.num_friends_selected').text num_friends
+
+  update_num_friends()
+  $form.find('#friends input:checkbox').on 'change', -> update_num_friends()
+
+
+  #
+  # Update number of groups selected
+
+  num_groups = 0
+  update_num_groups = ->
+    num_groups = $form.find('#groups input:checked').length
+    $('.num_groups_selected').text num_groups
+
+  update_num_groups()
+  $form.find('#groups input:checkbox').on 'change', -> update_num_groups()
 
   $('#submitModal').foundation 'reveal',
     open: ->
@@ -33,6 +49,7 @@ $ ->
       $msg_list.empty()
       for msg_id in messages
         msg = $("##{msg_id}").val()
-        $msg_list.append( "<li>#{window.nl2br("hey (NAME),\n#{msg}")}</li>" )
+        $msg_list.append( window.nl2br("<li><i>Private Messages:</i>\nhey (name),\n#{msg}</li>" ) if num_friends > 0
+        $msg_list.append( window.nl2br("<li><i>Wall Posts:</i>\nHey (Name)!\n\n#{msg}</li>") ) if num_groups > 0
 
       return

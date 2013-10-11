@@ -10,9 +10,12 @@ abbr, acronym, time { font-size:85%; letter-spacing:0.1em; text-transform:upperc
 time { text-transform:none; }
 
 input[type="checkbox"], input[type="radio"] { margin:0 1em 0.5em 0; }
-fieldset { border-color:#bbb;
+fieldset { background:white;
   legend { background:none; }
 }
-#submitModal li { margin-left:2.5em; }
+#submitModal { @include columns(2);
+  li { border-bottom:1px solid #ddd; margin-left:2.5em; margin-bottom:0.5em; padding-bottom:0.5em; }
+}
+.panel { background:white; }
 
 .rails_flash { display:none; }

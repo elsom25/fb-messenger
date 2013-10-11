@@ -2,11 +2,16 @@
   #submitModal.reveal-modal.medium
     h2 Confirm your submission.
     p
-      ' You are about to mass message
-      span.num_friends_selected' 0
+      ' You are about to mass private message
+      strong.num_friends_selected' 0
       | friends.
 
-    p You are messaging your friends randomly one of:
+    p
+      ' You are about to mass wall post
+      strong.num_groups_selected' 0
+      | groups.
+
+    p Your messages will be randomly chosen from:
     ol#message_list
 
     input.button.small.radius name='commit' type='submit' value='Send Messages' form='new_message'
@@ -20,16 +25,26 @@
   .small-12.columns
     p.lead Message your friends and encourage them to learn more, get involved, and most importantly, <b>Vote Real</b>.
     p Select who you would like to message, and fill in as many of the message boxes as you'd like. When messages are being sent, it will randomly select from the messages you fill in. If you only fill in one, all people will be messaged the same thing.
-    p Every message is placed in a template, to be structured like:
-    pre
-      | hello (NAME),
-      br
-      | (YOUR MESSAGE)
-    br
+    p Every message is placed in a template.
+
+    .panel
+      p The template for personal messages:
+      pre
+        | hey (first_name),
+        br
+        | (Your message)
+
+    .panel
+      p The template for page posts:
+      pre
+        | Hello (Page Name)!
+        br
+        br
+        | (Your message)
 
 = form_for @message do |f|
   .row
-    fieldset
+    fieldset#messages
       legend
         | Messages (
         span.num_messages_selected 0
@@ -42,16 +57,37 @@
 
   .row
     fieldset
-      legend
-        | Friends (
-        span.num_friends_selected 0
-        | )
-      - @friends.in_groups(4, false) do |friend_group|
-        .large-3.small-6.columns
-          - friend_group.each do |friend|
-            label
-              = check_box_tag 'messages[friends_uids][]', friend.to_json, @selected_friends.include?(friend)
-              = truncate(friend['name'], length: 25)
+      legend Connections
+      .small-12.columns
+        .section-container.auto(data-section)
+          section.active
+            p.title(data-section-title)
+              a href="#"
+                | Private Messages (
+                span.num_friends_selected 0
+                | )
+            .content#friends(data-section-content)
+              .row
+                - @friends.in_groups(4, false) do |friend_group|
+                  .large-3.small-6.columns
+                    - friend_group.each do |friend|
+                      label
+                        = check_box_tag 'messages[friends_uids][]', friend.to_json, @selected_friends.include?(friend)
+                        = truncate(friend['name'], length: 25)
+          section
+            p.title(data-section-title)
+              a href="#"
+                | Wall Posts (
+                span.num_groups_selected 0
+                | )
+            .content#groups(data-section-content)
+              .row
+                - @groups.in_groups(2, false) do |group_group|
+                  .small-6.columns
+                    - group_group.each do |group|
+                      label
+                        = check_box_tag 'messages[groups_uids][]', group.to_json, @selected_groups.include?(group)
+                        = truncate(group['name'], length: 58)
 
   .row
     fieldset

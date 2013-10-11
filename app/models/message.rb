@@ -7,11 +7,12 @@ class Message
   #BLACKLIST= Adam Garcia; David Collins;
 
 
-  attr_reader :sender_uid, :sender_token
+  attr_reader :sender_uid, :sender_token, :graph
 
-  def initialize(sender_uid, sender_token)
+  def initialize(sender_uid, sender_token, graph)
     @sender_uid = sender_uid
     @sender_token = sender_token
+    @graph = graph
   end
 
   def send_mass_message(friend_list, message_list, subject=nil)
@@ -24,6 +25,13 @@ class Message
     end
 
     client.close
+  end
+
+  def send_mass_post(object_list, message_list)
+    object_list.each do |object|
+      templated_message = "Hey #{object.name}!\n\n#{message_list.sample}"
+      @graph.put_object(object.id, 'feed', message: templated_message)
+    end
   end
 
   def self.get_friends(graph)
@@ -86,6 +94,19 @@ class Message
                uw_all: uw_friends.to_a,
       waterloo_region: waterloo_region_friends.to_a,
                   all: all_friends.to_a
+    )
+  end
+
+  def self.get_groups_and_pages(graph)
+    groups = graph.get_connections('me', 'groups').to_set
+    pages  = graph.get_connections('me', 'accounts').to_set
+
+    all = groups | pages
+
+    OpenStruct.new(
+      groups: groups.to_a,
+       pages: pages.to_a,
+         all: all.to_a
     )
   end
 
