@@ -12,12 +12,15 @@
 #= require i18n/translations
 
 # ALL THE REST
-#= require root
+#= require_tree
 
 'use strict'
 
 I18n.defaultLocale = '<%= I18n.default_locale %>'
 I18n.locale = $('html').attr 'lang'
+
+window.nl2br = (str) ->
+  (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2')
 
 startSpinner = ->
   $('#loading-spinner').show()

@@ -1,9 +1,8 @@
 'use strict'
 $ ->
-  nl2br = (str) -> (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2')
 
-  $form = $('#new_message')
-  messages       = []
+  $form    = $('#new_message')
+  messages = []
 
   #
   # Update number of messages typed
@@ -34,6 +33,6 @@ $ ->
       $msg_list.empty()
       for msg_id in messages
         msg = $("##{msg_id}").val()
-        $msg_list.append( "<li>#{nl2br("hey (NAME),\n#{msg}")}</li>" )
+        $msg_list.append( "<li>#{window.nl2br("hey (NAME),\n#{msg}")}</li>" )
 
       return
