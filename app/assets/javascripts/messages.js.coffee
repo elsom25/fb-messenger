@@ -45,11 +45,13 @@ $ ->
 
   $('#submitModal').foundation 'reveal',
     open: ->
-      $msg_list = $('#message_list')
-      $msg_list.empty()
+      $private_msg_list = $('#private_message_list')
+      $wall_msg_list = $('#wall_message_list')
+      $private_msg_list.empty()
+      $wall_msg_list.empty()
       for msg_id in messages
         msg = $("##{msg_id}").val()
-        $msg_list.append( window.nl2br("<li><i>Private Messages:</i>\nhey (name),\n#{msg}</li>" ) if num_friends > 0
-        $msg_list.append( window.nl2br("<li><i>Wall Posts:</i>\nHey (Name)!\n\n#{msg}</li>") ) if num_groups > 0
+        $private_msg_list.append( window.nl2br("<li>hey (name),\n#{msg}</li>") ) if num_friends > 0
+        $wall_msg_list.append( window.nl2br("<li>Hey (Name)!\n\n#{msg}</li>") ) if num_groups > 0
 
       return

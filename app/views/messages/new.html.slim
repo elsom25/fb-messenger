@@ -1,6 +1,6 @@
 - content_for :modals do
-  #submitModal.reveal-modal.medium
-    h2 Confirm your submission.
+  #submitModal.reveal-modal
+    h3 Confirm your submission.
     p
       ' You are about to mass private message
       strong.num_friends_selected' 0
@@ -12,7 +12,13 @@
       | groups.
 
     p Your messages will be randomly chosen from:
-    ol#message_list
+    .row
+      .small-6.columns
+        h4 Private Messages:
+        ol#private_message_list
+      .small-6.columns
+        h4 Wall Posts:
+        ol#wall_message_list
 
     input.button.small.radius name='commit' type='submit' value='Send Messages' form='new_message'
     a.close-reveal-modal &#215;

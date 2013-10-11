@@ -13,7 +13,7 @@ input[type="checkbox"], input[type="radio"] { margin:0 1em 0.5em 0; }
 fieldset { background:white;
   legend { background:none; }
 }
-#submitModal { @include columns(2);
+#submitModal {
   li { border-bottom:1px solid #ddd; margin-left:2.5em; margin-bottom:0.5em; padding-bottom:0.5em; }
 }
 .panel { background:white; }
