@@ -24,7 +24,7 @@ en:
     login:              'Login with Facebook'
     logout:             'Logout'
   app:
-    title:              'Vote Real Dashboard'
+    title:              'FB Messenger'
     subtitle:           'Example of OmniAuth implementations in Ruby on Rails 4.'
   auth:
     facebook_html:      'Login with Facebook'
