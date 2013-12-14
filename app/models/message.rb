@@ -3,8 +3,14 @@ class Message
 
   CONFIG = YAML.load_file(Rails.root.join('config/facebook.yml'))[Rails.env]
   SELECTION = %w(uid name first_name).join(',').freeze
-  BLACKLIST = %w(511137279 571555191).join(',').freeze
-  #BLACKLIST= Adam Garcia; David Collins;
+  BLACKLIST = %w(511137279 571555191 1070874668 508384289 100000306667329).join(',').freeze
+=begin
+  Adam Garcia:   511137279
+  David Collins: 571555191
+  Danielle Burt: 1070874668
+  Maaz Yasin:    508384289
+  Renish Kamal:  100000306667329
+=end
   ROOT_QUERY = %Q{
     SELECT #{SELECTION}
     FROM user
