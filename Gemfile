@@ -30,7 +30,7 @@ gem 'i18n-js'                                 # I18n in JS
 gem 'sass-rails',           '~> 4.0.0'
 gem 'coffee-rails',         '~> 4.0.0'
 gem 'slim-rails'
-gem 'compass-rails',        '~> 2.0.alpha.0'
+gem 'compass-rails'
 gem 'font-awesome-rails'
 gem 'zurb-foundation'
 
