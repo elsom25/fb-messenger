@@ -43,6 +43,7 @@ class Message
       client.close
 
       ap "Messaged #{templated_body}"
+      sleep 0.25
     end
 
     ap '----------------------------------------------------------------------'
