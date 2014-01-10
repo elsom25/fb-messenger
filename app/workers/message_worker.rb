@@ -2,7 +2,7 @@ class MessageWorker
   include Sidekiq::Worker
 
   def perform(sender_uid, sender_token, receiver_name, receiver_uid, message_body, message_subject=nil)
-    flush "===[#{receiver_name}] Initialized MessageWorker instance"
+    flush "===[#{receiver_name}:#{sender_uid}] Initialized MessageWorker instance"
 
     message = create_message(receiver_uid, message_body, message_subject)
 
@@ -10,7 +10,7 @@ class MessageWorker
     client.send message
     client.close
 
-    flush "===[#{receiver_name}] Message sent"
+    flush "===[#{receiver_name}:#{sender_uid}] Message sent"
   end
 
 protected
