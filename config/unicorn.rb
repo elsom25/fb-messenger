@@ -9,6 +9,8 @@ before_fork do |server, worker|
   end
 
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+
+  @resque_pid ||= spawn('bundle exec sidekiq -c 2')
 end
 
 after_fork do |server, worker|
