@@ -8,10 +8,7 @@ before_fork do |server, worker|
     Process.kill 'QUIT', Process.pid
   end
 
-  @sidekiq_pid ||= spawn('bundle exec sidekiq -c 2')
-
-  defined?(ActiveRecord::Base) and
-    ActiveRecord::Base.connection.disconnect!
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
 end
 
 after_fork do |server, worker|
@@ -19,15 +16,13 @@ after_fork do |server, worker|
     puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
   end
 
+  defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
+
   Sidekiq.configure_client do |config|
-    config.redis = { size: 1, url: ENV['REDISCLOUD_URL'] || 'redis://localhost:6379/' }
-
+    config.redis = { size: 1, namespace: 'sidekiq' }
   end
-
   Sidekiq.configure_server do |config|
-    config.redis = { size: 5, url: ENV['REDISCLOUD_URL'] || 'redis://localhost:6379/' }
+    config.redis = { size: 5, namespace: 'sidekiq' }
   end
 
-  defined?(ActiveRecord::Base) and
-    ActiveRecord::Base.establish_connection
 end
