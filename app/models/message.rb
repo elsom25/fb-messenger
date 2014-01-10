@@ -31,17 +31,12 @@ class Message
   end
 
   def send_mass_message(friend_list, message_list, subject=nil)
-    ap '======================================================================'
-    ap friend_list
-
     friend_list.each do |friend|
       templated_body = "hey #{friend.first_name.downcase},\n#{message_list.sample}"
 
-      ap "Enqueued #{templated_body}"
       MessageWorker.perform_async(@sender_uid, @sender_token, friend.uid, templated_body, subject)
+      ap "Enqueued #{friend.name}"
     end
-
-    ap '----------------------------------------------------------------------'
   end
 
   def send_mass_post(object_list, message_list)
