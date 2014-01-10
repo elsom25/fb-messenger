@@ -18,7 +18,7 @@ class MessagesController < AuthenticatedController
     friends = params[:messages][:friends_uids]
     if friends
       @selected_friends = friends.map{ |f| OpenStruct.new(JSON.parse(f)) }
-      # @message.send_mass_message( @selected_friends, selected_messages )
+      @message.send_mass_message( @selected_friends, selected_messages )
     end
 
     groups = params[:messages][:groups_uids]
