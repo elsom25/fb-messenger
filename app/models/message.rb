@@ -33,10 +33,15 @@ class Message
   def send_mass_message(friend_list, message_list, subject=nil)
     client = create_client
 
+    ap ''
+    ap '======================================================================'
+    ap friend_list.map(&:first_name)
+
     friend_list.each do |friend|
       templated_body = "hey #{friend.first_name.downcase},\n#{message_list.sample}"
       message = create_message(friend.uid, templated_body, subject)
       client.send message
+      ap friend
     end
 
     client.close
