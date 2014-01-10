@@ -34,7 +34,7 @@ class Message
     friend_list.each do |friend|
       templated_body = "hey #{friend.first_name.downcase},\n#{message_list.sample}"
 
-      MessageWorker.perform_async(@sender_uid, @sender_token, friend.uid, templated_body, subject)
+      MessageWorker.perform_async(@sender_uid, @sender_token, friend.name, friend.uid, templated_body, subject)
       ap "Enqueued #{friend.name}"
     end
   end

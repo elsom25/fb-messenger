@@ -1,8 +1,9 @@
 class MessageWorker
   include Sidekiq::Worker
 
-  def perform(sender_uid, sender_token, receiver_uid, message_body, message_subject=nil)
-    flush "===[#{self.object_id}] Initialized MessageWorker instance"
+  def perform(sender_uid, sender_token, receiver_name, receiver_uid, message_body, message_subject=nil)
+    @name = receiver_name
+    flush "===[#{@name}] Initialized MessageWorker instance"
 
     message = create_message(receiver_uid, message_body, message_subject)
 
@@ -10,7 +11,7 @@ class MessageWorker
     client.send message
     client.close
 
-    flush "===[#{self.object_id}] Message sent"
+    flush "===[#{@name}] Message sent"
   end
 
 protected
@@ -21,7 +22,7 @@ protected
     message = Jabber::Message.new receiver_chat_id, message_body
     message.subject = message_subject if message_subject
 
-    flush "===[#{self.object_id}] Message created: #{message_body}"
+    flush "===[#{@name}] Message created: #{message_body}"
     message
   end
 
