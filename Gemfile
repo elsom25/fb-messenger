@@ -9,7 +9,8 @@ gem 'pg',      group: :production             # Production DB
 # Servers
 gem 'puma'
 gem 'unicorn'
-gem 'awesome_print'
+gem 'awesome_print'                           # Fancy console printing
+gem 'resque',               '~> 1.22.0'       # Background queue
 
 # Auth
 gem 'omniauth'                                # OmniAuth

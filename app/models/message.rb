@@ -36,13 +36,9 @@ class Message
 
     friend_list.each do |friend|
       templated_body = "hey #{friend.first_name.downcase},\n#{message_list.sample}"
-      message = create_message(friend.uid, templated_body, subject)
 
-      client = create_client
-      client.send message
-      client.close
-
-      ap "Messaged #{templated_body}"
+      ap "Enqueued #{templated_body}"
+      Resque.enqueue(MessageSender, @sender_uid, @sender_token, friend.uid, templated_body, subject)
     end
 
     ap '----------------------------------------------------------------------'
@@ -138,6 +134,47 @@ class Message
     )
   end
 
+end
+
+module RetriedJob
+  def on_failure_retry(e, *args)
+    puts "Performing #{self} caused an exception (#{e}). Retrying..."
+    $stdout.flush
+    Resque.enqueue self, *args
+  end
+end
+
+class MessageSender
+  extend RetriedJob
+
+  @queue = :message_worker
+
+  def initialize(sender_uid, sender_token, receiver_uid, message_body, message_subject=nil)
+    @sender_uid = sender_uid
+    @sender_token = sender_token
+    @receiver_uid = receiver_uid
+    @message_body = message_body
+    @message_subject = message_subject if message_subject
+
+    flush 'Initialized MessageSender worker instance'
+  end
+
+  def send
+    message = create_message
+
+    client = create_client
+    client.send message
+    client.close
+
+    flush "Message sent"
+  end
+
+  def self.perform(*args)
+    (new *args).send
+  rescue Resque::TermException
+    Resque.enqueue self, *args
+  end
+
 protected
 
   def create_client
@@ -158,13 +195,19 @@ protected
     client
   end
 
-  def create_message(receiver_uid, body, subject=nil)
-    receiver_chat_id = "-#{receiver_uid}@chat.facebook.com"
+  def self.create_message
+    receiver_chat_id = "-#{@receiver_uid}@chat.facebook.com"
 
-    message = Jabber::Message.new receiver_chat_id, body
-    message.subject = subject if subject
+    message = Jabber::Message.new receiver_chat_id, @body
+    message.subject = @subject if @subject
 
+    flush "Message created: #{message}"
     message
+  end
+
+  def flush(str)
+    puts str
+    $stdout.flush
   end
 
 end
