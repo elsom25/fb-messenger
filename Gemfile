@@ -9,6 +9,7 @@ gem 'pg',      group: :production             # Production DB
 # Servers
 gem 'puma'
 gem 'unicorn'
+gem 'awesome_print'
 
 # Auth
 gem 'omniauth'                                # OmniAuth
