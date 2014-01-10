@@ -195,7 +195,7 @@ protected
     client
   end
 
-  def self.create_message
+  def create_message
     receiver_chat_id = "-#{@receiver_uid}@chat.facebook.com"
 
     message = Jabber::Message.new receiver_chat_id, @body
