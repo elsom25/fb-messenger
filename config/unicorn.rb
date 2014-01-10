@@ -18,11 +18,12 @@ after_fork do |server, worker|
 
   defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
 
+  ENV['REDISCLOUD_URL'] ||= 'redis://localhost:6379'
   Sidekiq.configure_client do |config|
-    config.redis = { size: 1, namespace: 'sidekiq' }
+    config.redis = { size: 1, namespace: 'sidekiq', url: ENV['REDISCLOUD_URL'] }
   end
   Sidekiq.configure_server do |config|
-    config.redis = { size: 5, namespace: 'sidekiq' }
+    config.redis = { size: 5, namespace: 'sidekiq', url: ENV['REDISCLOUD_URL'] }
   end
 
 end
