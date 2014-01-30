@@ -89,12 +89,14 @@ class Message
       },
       liked_page: %Q{
         #{ROOT_QUERY}
-        AND WHERE uid IN (
+        AND uid IN (
           SELECT uid2
           FROM like
           WHERE object_id = #{PAGE_ID}
         )
       },
+      select user_id from like where object_id = <page ID> and user_id in (select uid1 from friend where uid2 = <the user id you want to know about>;
+
       all: "#{ROOT_QUERY}"
     )
     uw_2018         = results['uw_2018'].to_set
