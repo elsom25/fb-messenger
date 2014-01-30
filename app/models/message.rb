@@ -117,7 +117,7 @@ class Message
       uw_other: uw_other.to_a,
       waterloo: waterloo_region_only.to_a,
        unknown: unknown.to_a,
-         liked: results['liked_page'].to_a
+         liked: results['liked_page'].to_a,
            all: all.sort_by{ |u| u['name'] }
     )
   end
