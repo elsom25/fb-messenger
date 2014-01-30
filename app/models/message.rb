@@ -90,7 +90,7 @@ class Message
       liked_page: %Q{
         #{ROOT_QUERY}
         AND uid IN (
-          SELECT uid2
+          SELECT user_id
           FROM like
           WHERE object_id = #{PAGE_ID}
         )
