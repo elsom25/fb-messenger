@@ -11,6 +11,7 @@ gem 'puma'
 gem 'unicorn'
 gem 'awesome_print'                           # Fancy console printing
 gem 'sidekiq'                                 # Background queue
+gem 'sidekiq-limit_fetch'                     # Set queue limits
 
 # Auth
 gem 'omniauth'                                # OmniAuth
