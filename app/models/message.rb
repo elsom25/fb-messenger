@@ -106,6 +106,7 @@ class Message
     uw              = results['uw'].to_set
     waterloo_region = results['waterloo_region'].to_set
     all             = results['all'].to_set
+    liked           = results['liked_page'].to_set
 
     uw_other             = uw - (uw_2018 | uw_2017 | uw_2016 | uw_2015 | uw_2014 | uw_2013)
     waterloo_region_only = waterloo_region - uw
@@ -121,7 +122,7 @@ class Message
       uw_other: uw_other.to_a,
       waterloo: waterloo_region_only.to_a,
        unknown: unknown.to_a,
-         liked: results['liked_page'].to_a,
+         liked: liked.to_a,
            all: all.sort_by{ |u| u['name'] }
     )
   end
