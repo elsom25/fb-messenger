@@ -2,6 +2,7 @@ class Message
   include ActiveModel::Model
 
   CONFIG = YAML.load_file(Rails.root.join('config/facebook.yml'))[Rails.env]
+  PAGE_ID = 242656965898126
   SELECTION = %w(uid name first_name).join(',').freeze
   BLACKLIST = %w(511137279 571555191 1070874668 508384289 100000306667329).join(',').freeze
 =begin
@@ -86,6 +87,10 @@ class Message
         #{ROOT_QUERY}
         AND 'Waterloo' IN affiliations
       },
+      liked_page: %Q{
+        #{ROOT_QUERY}
+        AND #{PAGE_ID} IN page_fan
+      },
       all: "#{ROOT_QUERY}"
     )
     uw_2018         = results['uw_2018'].to_set
@@ -112,6 +117,7 @@ class Message
       uw_other: uw_other.to_a,
       waterloo: waterloo_region_only.to_a,
        unknown: unknown.to_a,
+         liked: results['liked_page'].to_a
            all: all.sort_by{ |u| u['name'] }
     )
   end
