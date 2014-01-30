@@ -93,6 +93,7 @@ class Message
           SELECT user_id
           FROM like
           WHERE object_id = #{PAGE_ID}
+          AND user_id IN (SELECT uid2 FROM friend WHERE uid2 = me())
         )
       },
       all: "#{ROOT_QUERY}"
@@ -122,7 +123,7 @@ class Message
       uw_other: uw_other.to_a,
       waterloo: waterloo_region_only.to_a,
        unknown: unknown.to_a,
-         # liked: liked.to_a,
+         liked: liked.to_a,
            all: all.sort_by{ |u| u['name'] }
     )
   end
