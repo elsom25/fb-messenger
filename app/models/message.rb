@@ -89,8 +89,13 @@ class Message
       },
       liked_page: %Q{
         #{ROOT_QUERY}
-        AND #{PAGE_ID} IN page_fan
+        WHERE uid IN (
+          SELECT uid2
+          FROM like
+          WHERE object_id = #{PAGE_ID}
+        )
       },
+
       all: "#{ROOT_QUERY}"
     )
     uw_2018         = results['uw_2018'].to_set
