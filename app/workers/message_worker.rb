@@ -3,6 +3,8 @@ class MessageWorker
 
   def perform(sender_uid, sender_token, receiver_name, receiver_uid, message_body, message_subject=nil)
     flush "===[#{receiver_name}:#{sender_uid}] Initialized MessageWorker instance"
+    sleep 20
+    flush "===[#{receiver_name}:#{sender_uid}] Delay finished"
 
     message = create_message(receiver_uid, message_body, message_subject)
 
@@ -11,7 +13,6 @@ class MessageWorker
     client.close
 
     flush "===[#{receiver_name}:#{sender_uid}] Message sent"
-    sleep 5
   end
 
 protected
