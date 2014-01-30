@@ -11,6 +11,7 @@ class MessageWorker
     client.close
 
     flush "===[#{receiver_name}:#{sender_uid}] Message sent"
+    sleep 5
   end
 
 protected
