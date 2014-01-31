@@ -33,7 +33,7 @@ class Message
 
   def send_mass_message(friend_list, message_list, subject=nil)
     friend_list.each do |friend|
-      templated_body = "hey #{friend.first_name.downcase},\n#{message_list.sample}"
+      templated_body = "#{['hey', 'hi'].sample} #{friend.first_name.downcase}, #{message_list.sample}"
 
       MessageWorker.delay_for(3.seconds).perform_async(@sender_uid, @sender_token, friend.name, friend.uid, templated_body, subject)
       ap "Enqueued #{friend.name}"
